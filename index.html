@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<title>BOD Attendance</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/dayjs@1.8.23/dayjs.min.js"></script>
+		<style>
+			.island {
+				width: 400px;
+				height: 300px;
+				margin: auto auto;
+			}
+		</style>
+	</head>
+	<body>
+	
+	<div class="island">
+		<h3>Attendance recorded</h3>
+	</div>
+	
+	<script>
+		const schedule = {
+			'3/27/20':'gold',
+			'3/27/20':'gold',
+		}
+		const bell_schedule = {
+			black: [
+				{
+					period:"1",
+					start:"8:30 AM",
+					end:"9:50 AM"
+				},
+				{
+					period:"2",
+					start:"10:05 AM",
+					end:"11:25 AM"
+				},
+				{
+					period:"3",
+					start:"12:05 PM",
+					end:"1:25 PM"
+				},
+				{
+					period:"4",
+					start:"1:40 PM",
+					end:"3:00 PM"
+				},
+			],
+			gold: [
+				{
+					period:"5",
+					start:"8:30 AM",
+					end:"9:50 AM"
+				},
+				{
+					period:"6",
+					start:"10:05 AM",
+					end:"11:25 AM"
+				},
+				{
+					period:"7",
+					start:"12:05 PM",
+					end:"1:25 PM"
+				},
+				{
+					period:"8",
+					start:"1:40 PM",
+					end:"3:00 PM"
+				},
+			],
+		}
+		
+		var startHappyHourD = new Date();
+		startHappyHourD.setHours(17,30,0); // 5.30 pm
+		var endHappyHourD = new Date();
+		endHappyHourD.setHours(18,30,0); // 6.30 pm
+		
+		var currentD = new Date();
+	</script>
+	</body>
+</html>
