@@ -1,36 +1,311 @@
 <html>
 	<head>
 		<title>BOD Attendance</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1, minimal-ui" />
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/dayjs@1.8.23/dayjs.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/dayjs@1.8.23/plugin/isBetween.js"></script>
 		<style>
-			.island {
-				width: 200px;
-				height: 600px;
-				background-color: blue;
+			/*-----------------------------------*\
+			  $RESET
+			\*-----------------------------------*/
 
-				position:absolute; /*it can be fixed too*/
-				left:0; right:0;
-				top:0; bottom:0;
-				margin:auto;
-
-				/*this to solve "the content will not be cut when the window is smaller than the content": */
-				max-width:100%;
-				max-height:100%;
-				overflow:auto;
+			body {
+			  overflow-x: hidden;
+				overflow-y: hidden;
 			}
+
+			*, :before, :after {
+			  margin: 0;
+			  padding: 0;
+			  position: relative;
+			  box-sizing: border-box;
+			}
+
+			input, select, button, textarea {
+			  -webkit-appearance: none;
+			          appearance: none;
+			  font: inherit;
+			  color: inherit;
+			}
+
+			/*-----------------------------------*\
+			  $OBJECTS
+			\*-----------------------------------*/
+
+			.butt, .input {
+			  padding: .75rem;
+			  margin: .375rem;
+
+			  background-color: transparent;
+			  border-radius: 4px;
+			}
+
+			  .butt:focus, .input:focus {
+			    outline: none;
+			  }
+
+			.butt {
+			  border: 2px solid #2d3436;
+			  line-height: 1.375;
+			  padding-left: 1.5rem;
+			  padding-right: 1.5rem;
+			  font-weight: 700;
+			  color: #2d3436;
+			  cursor: pointer;
+			}
+
+			  .butt--primary {
+			    background-color: #f35626;
+			    color: #fff;
+			  }
+
+			.input {
+			  border: 1px solid #c0c8c9;
+			  border-radius: 4px;
+			}
+
+			/*-----------------------------------*\
+			  $TYPOGRAPHY
+			\*-----------------------------------*/
+
+			h1, .alpha {
+			  margin-bottom: 1.5rem;
+
+			  font-size: 2.5rem;
+			  font-weight: 100;
+			  line-height: 1;
+			  letter-spacing: -.05em;
+			}
+
+			h2, .beta {
+			  margin-bottom: .75rem;
+
+			  font-weight: 400;
+			  font-size: 1.5rem;
+			  line-height: 1;
+			}
+
+			@media (min-width: 650px) {
+			  .mega {
+			    font-size: 3rem;
+			    line-height: 1;
+			  }
+			}
+
+			.subhead, .meta {
+			  color: #2d3436;
+			}
+
+			.promo {
+			  text-align: center;
+			}
+
+			p, hr, form {
+			  margin-bottom: 0.75rem;
+			}
+
+			hr {
+			  border: none;
+			  margin-top: -1px;
+			  height: 1px;
+			  background-color: #c0c8c9;
+			  background-image: linear-gradient(to right, #ffffff 0%,#c0c8c9 50%,#ffffff 100%);
+			}
+
+			a {
+			  color: inherit;
+			  text-decoration: underline;
+			}
+
+			  a:hover {
+			    color: #f35626;
+			  }
+
+			/*-----------------------------------*\
+			  $LAYOUT
+			\*-----------------------------------*/
+
+			.wrap {
+			  max-width: 38rem;
+			  margin: 0 auto;
+			}
+
+			.island {
+			  padding: 1.5rem;
+			}
+
+			.isle {
+			  padding: .75rem;
+			}
+
+			.spit {
+			  padding: .375rem;
+			}
+
+			/*-----------------------------------*\
+			  $BASE
+			\*-----------------------------------*/
+
+			html {
+			  font: 100%/1.5 "Roboto", Verdana, sans-serif;
+			  color: #3d464d;
+			  background-color: #fff;
+			  -webkit-font-smoothing: antialiased;
+			  width: 100%;
+
+			  overflow: hidden-x;
+
+			  /* Centering in The Unknown */
+			  text-align: center;
+			}
+
+			@media (min-width: 650px) {
+			  html {
+			    height: 100%;
+			  }
+
+			  html:before {
+			    content: '';
+			    display: inline-block;
+			    height: 100%;
+			    vertical-align: middle;
+			    margin-right: -0.25em;
+			  }
+
+			  body {
+			    display: inline-block;
+			    vertical-align: middle;
+			    max-width: 38rem;
+			  }
+			}
+
+			/*-----------------------------------*\
+			  $HEADER
+			\*-----------------------------------*/
+
+			.site__header {
+			  animation: bounceInUp 1s;
+			}
+
+			  .site__title {
+			    color: #b2bec3;
+			  }
+
+			.site__content {
+			  animation: bounceInUp 1s;
+			  animation-delay: .1s;
+			}
+
+			  .site__content form {
+			    animation: bounceInUp 1s;
+			    animation-delay: .1s;
+			  }
+
+
+				.time {
+					border: 1px solid #b2bec3;
+					line-height: 1.375;
+					padding-left: 1.5rem;
+					padding-right: 1.5rem;
+					color: #b2bec3;
+					
+					padding: .25rem;
+					margin: .375rem;
+					background-color: white;
+					border-radius: 4px;
+				}
+				#time-now {
+					border-width: 2px;
+					font-weight: bold;
+				}
+				#time-in {
+					
+				}
+				.time-out {
+					
+				}
+				.success {
+					color: #55efc4;
+					border-color: #55efc4;
+				}
+				.error {
+					color: #ff7675;
+					border-color: #ff7675;
+				}
+				
+				div.boxItem { 
+				  display: inline-block;
+				  border: 1px solid black;
+				  padding: 1em;  
+				  margin-right: 5em;
+				  position:relative
+				}
+
+				.boxItem:before,
+				.boxItem:after
+				{
+				  content:'';
+				  width:0.75rem;/* size of your margin */
+				  border-bottom:1px solid;
+				  position:absolute;
+				  top:50%;
+
+				}
+				:after {
+				  left:100%;
+				}
+				:before {
+				  right:100%;
+				}
+				.boxItem:first-of-type:before,
+				.boxItem:last-of-type:after {
+				  display:none;
+				}
+				.myBox {
+				  white-space:nowrap; 
+					text-align:center;
+				}
 		</style>
 	</head>
 	<body>
+		
+	<header class="site__header island">
+	  <div class="wrap">
+			<span id="animationSandbox" style="display: block;"><h1 class="site__title mega"></h1></span>
+			<p id="course" class="meta">AP Computer Science A</p>
+			<p id="period" class="meta">Period 7</p>
+			<p id ="times" class="meta"></p>
+			<!-- <span class="beta subhead">Period 7</span> -->
+	  </div>
+	</header><!-- /.site__header -->
 	
-	<div class="island">
-		<h3>Attendance recorded</h3>
-	</div>
+	<main class="site__content island" role="content">
+	  <div class="wrap">
+	    <p class="meta"><button id="go-back" class="butt">Back To Course Page</button></p>
+	    <p><small></small></p>
+	  </div>
+	</main><!-- /.site__content -->
 	
 	<script>
 		const schedule = {
 			'3/27/20':'gold',
-			'3/27/20':'gold',
+			'3/30/20':'black',
+			'3/31/20':'gold',
+			'4/1/20':'black',
+			'4/2/20':'gold',
+			'4/20/20':'black',
+			'4/21/20':'gold',
+			'4/22/20':'black',
+			'4/23/20':'gold',
+			'4/24/20':'black',
+			'4/27/20':'gold',
+			'4/28/20':'black',
+			'4/29/20':'gold',
+			'4/30/20':'black',
+			'5/1/20':'gold'
 		}
 		const bell_schedule = {
 			black: [
@@ -78,13 +353,67 @@
 				},
 			],
 		}
+			// <p id="course" class="meta">AP Computer Science A</p>
+			// <p id="period" class="meta">Period 7</p>
+		// <p id ="times" class="meta"><span class="myBox"><span class="time time-start boxItem">12:05 PM</span><span class="time time-end boxItem">1:25 PM</span></span></p>
 		
-		var startHappyHourD = new Date();
-		startHappyHourD.setHours(17,30,0); // 5.30 pm
-		var endHappyHourD = new Date();
-		endHappyHourD.setHours(18,30,0); // 6.30 pm
+		dayjs.extend(window.dayjs_plugin_isBetween);
 		
-		var currentD = new Date();
+		const urlParams = new URLSearchParams(window.location.search);
+		const c = atob(urlParams.get('c')).split(';');
+		document.querySelector('#course').innerHTML = c[0];
+		document.querySelector('#period').innerHTML = 'Period ' + c[1];
+		//const now = dayjs();
+		//const today = now.format('M/D/YY');
+		
+		const today = '3/27/20';
+		const now = dayjs(today + ' ' + '1:27 PM', 'M/D/YY h:mm A');
+		
+		if (today in schedule) {
+			const bell = schedule[today];
+			bell_schedule[bell].forEach(x => {
+				if (x.period == c[1]) {
+					console.log('Period: ' + c[1]);
+					console.log('Now: ' + now.format('h:mm A'))
+					start = dayjs(today + ' ' + x.start, 'M/D/YY h:mm A');
+					console.log('Start: ' + start.format('h:mm A'));
+					end = dayjs(today + ' ' + x.end, 'M/D/YY h:mm A');
+					console.log('End: ' + end.format('h:mm A'));
+				
+					html = '';
+					if (now.isBetween(start, end, null, '[]')) {
+						document.querySelector('#animationSandbox').innerHTML = '<h1 class="site__title mega success">Attendance Recorded</h1>';
+						html += '<span class="myBox">';
+						html += '<span id="time-start" class="time boxItem success">' + start.format('h:mm A') + '</span>';
+						html += '<span id="time-now" class="time boxItem success">' + now.format('h:mm A') + '</span>';
+						html += '<span id="time-end" class="time boxItem success">' + end.format('h:mm A') + '</span>';
+						html += '</span>';
+					} else {
+						document.querySelector('#animationSandbox').innerHTML = '<h1 class="site__title mega error">Attendance Not Recorded</h1>';
+						if (now.isBefore(start)) {
+							html += '<span id="time-now" class="time error">' + now.format('h:mm A') + '</span>';
+						  html += '<span class="myBox">';
+							html += '<span id="time-start" class="time boxItem">' + start.format('h:mm A') + '</span>';
+							html += '<span id="time-end" class="time boxItem">' + end.format('h:mm A') + '</span>';
+							html += '</span>';
+						} else if (now.isAfter(end)) {
+						  html += '<span class="myBox">';
+							html += '<span id="time-start" class="time boxItem">' + start.format('h:mm A') + '</span>';
+							html += '<span id="time-end" class="time boxItem">' + end.format('h:mm A') + '</span>';
+							html += '</span>';
+							html += '<span id="time-now" class="time error">' + now.format('h:mm A') + '</span>';
+						}
+					}
+					document.querySelector('#times').innerHTML = html;
+				}
+			});
+		} else {
+			document.querySelector('#animationSandbox').innerHTML = '<h1 class="site__title mega">No School Today</h1>';
+		}
+		
+		document.querySelector('#go-back').addEventListener('click', e => {
+			history.back();
+		})
 	</script>
 	</body>
 </html>
