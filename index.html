@@ -667,11 +667,11 @@
 		const c = atob(urlParams.get('c')).split(';');
 		document.querySelector('#course').innerHTML = c[0];
 		document.querySelector('#period').innerHTML = 'Period ' + c[1];
-		// const now = dayjs();
-		// const today = now.format('M/D/YY');
+		const now = dayjs();
+		const today = now.format('M/D/YY');
 		
-		const today = '3/31/20';
-		const now = dayjs(today + ' ' + '1:25 PM', 'M/D/YY h:mm A');
+		// const today = '3/31/20';
+		// const now = dayjs(today + ' ' + '1:25 PM', 'M/D/YY h:mm A');
 		
 		console.log(window.performance.navigation);
 		
