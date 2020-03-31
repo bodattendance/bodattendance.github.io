@@ -520,9 +520,9 @@
 			@media screen and (min-width: 680px) {
 				#wrap {
 					position: absolute;
-					height: 340px;
-					width: 400px;
-					margin: -170px 0 0 -200px;
+					height: 400px;
+					width: 320px;
+					margin: -200px 0 0 -160px;
 					top: 50%;
 					left: 50%;
 				}
@@ -591,13 +591,12 @@
 				background-color: #55efc4;
 			}
 			#note {
-				margin-top: 2em;
 				font-size: 90%;
 				text-align: left;
 				
 				width: 252px;
 				display: block;
-				margin: 0 auto;
+				margin: 3em auto 0 auto;
 			}
 		</style>
 	</head>
@@ -627,7 +626,7 @@
 			<p id="course" class="info">AP Computer Science A</p>
 			<p id="period" class="info">Period 7</p>
 			<p id ="times"></p>
-			<!-- <p id="note"><i class="fas fa-info-circle"></i> <strong>Note: Do not refresh this page.</strong><br>You must click the attendance link from<br>Schoology for your attendance to count</p> -->
+			<p id="note"><i class="fas fa-info-circle"></i> <strong>Note: Do not refresh this page.</strong><br>You must click the attendance link from<br>Schoology for your attendance to count</p>
 		</div>
 
 		<form name="refreshForm">
@@ -675,7 +674,6 @@
 		const now = dayjs(today + ' ' + '1:25 PM', 'M/D/YY h:mm A');
 		
 		console.log(window.performance.navigation);
-		console.log(parent.window.performance.navigation);
 		
 		let metToday = false;
 		if (today in schedule) {
