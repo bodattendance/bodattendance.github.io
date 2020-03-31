@@ -673,7 +673,10 @@
 		
 		const today = '3/31/20';
 		const now = dayjs(today + ' ' + '1:25 PM', 'M/D/YY h:mm A');
-				
+		
+		console.log(window.performance.navigation);
+		console.log(parent.window.performance.navigation);
+		
 		let metToday = false;
 		if (today in schedule) {
 			const bell = schedule[today];
