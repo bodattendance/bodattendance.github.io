@@ -4,6 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="initial-scale=1, minimal-ui" />
 		
+		<script src="https://kit.fontawesome.com/7f18fdbe47.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/dayjs@1.8.23/dayjs.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/dayjs@1.8.23/plugin/isBetween.js"></script>
@@ -609,7 +610,12 @@
 			#note {
 				margin-top: 2em;
 				font-size: 90%;
-				line-height: 1.25;
+				line-height: 1.3;
+				text-align: left;
+				
+				width: 252px;
+				display: block;
+				margin: 0 auto;
 			}
 		</style>
 	</head>
@@ -639,7 +645,7 @@
 			<p id="course" class="info">AP Computer Science A</p>
 			<p id="period" class="info">Period 7</p>
 			<p id ="times"></p>
-			<p id="note"><strong>Note: Do not refresh this page.</strong><br>You must click the attendance link from<br>Schoology for your attendance to count</p>
+			<p id="note"><i class="fas fa-info-circle"></i> <strong>Note: Do not refresh this page.</strong><br>You must click the attendance link from<br>Schoology for your attendance to count</p>
 		</div>
 
 		<form name="refreshForm">
