@@ -5,25 +5,8 @@
 		<meta name="viewport" content="initial-scale=1, minimal-ui" />
 		
 		<script src="https://kit.fontawesome.com/7f18fdbe47.js" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/dayjs@1.8.23/dayjs.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/dayjs@1.8.23/plugin/isBetween.js"></script>
-		<script>
-			function checkRefresh() {
-			    if (document.refreshForm.visited.value == "") {
-			        // This is a fresh page load
-			        document.refreshForm.visited.value = "1";
-			        // You may want to add code here special for
-			        // fresh page loads
-							console.log("fresh page load");
-			    } else {
-			        // This is a page refresh
-			        // Insert code here representing what to do on
-			        // a refresh
-						console.log("page refresh");
-			    }
-			}
-		</script>
 		<style>
 			:root {
 				--green: #55efc4;
@@ -525,6 +508,7 @@
 			body {
 				font-family: GillSans, Calibri, Trebuchet, sans-serif;
 				font-size: 16px;
+				line-height: 1.5;
 			}
 			#wrap {
 				position: absolute;
@@ -610,7 +594,6 @@
 			#note {
 				margin-top: 2em;
 				font-size: 90%;
-				line-height: 1.3;
 				text-align: left;
 				
 				width: 252px;
@@ -619,7 +602,7 @@
 			}
 		</style>
 	</head>
-	<body onLoad="javascript:checkRefresh();">
+	<body>
 		
 		<div id="wrap">
 			<div class="f-modal-alert">
@@ -645,7 +628,7 @@
 			<p id="course" class="info">AP Computer Science A</p>
 			<p id="period" class="info">Period 7</p>
 			<p id ="times"></p>
-			<p id="note"><i class="fas fa-info-circle"></i> <strong>Note: Do not refresh this page.</strong><br>You must click the attendance link from<br>Schoology for your attendance to count</p>
+			<!-- <p id="note"><i class="fas fa-info-circle"></i> <strong>Note: Do not refresh this page.</strong><br>You must click the attendance link from<br>Schoology for your attendance to count</p> -->
 		</div>
 
 		<form name="refreshForm">
@@ -686,11 +669,13 @@
 		const c = atob(urlParams.get('c')).split(';');
 		document.querySelector('#course').innerHTML = c[0];
 		document.querySelector('#period').innerHTML = 'Period ' + c[1];
-		const now = dayjs();
-		const today = now.format('M/D/YY');
+		// const now = dayjs();
+		// const today = now.format('M/D/YY');
 		
-		// const today = '3/31/20';
-		// const now = dayjs(today + ' ' + '1:25 PM', 'M/D/YY h:mm A');
+		const today = '3/31/20';
+		const now = dayjs(today + ' ' + '1:25 PM', 'M/D/YY h:mm A');
+		
+		
 		
 		let metToday = false;
 		if (today in schedule) {
@@ -707,15 +692,23 @@
 				
 					html = '';
 					if (now.isBetween(start, end, null, '[]')) {
-						document.querySelector('.f-modal-success').style.display = 'block';
-						document.querySelector('#message').innerHTML = 'Attendance Recorded';
-						document.querySelector('#message').classList.add('success');
 						
-						html += '<span id="time-start" class="time success">' + start.format('h:mm A') + '</span>';
-						html += '<div class="line line-success"></div>';
-						html += '<span id="time-now" class="time success">' + now.format('h:mm A') + '</span>';
-						html += '<div class="line line-success"></div>';
-						html += '<span id="time-end" class="time success">' + end.format('h:mm A') + '</span>';
+						const didNavigate = window.performance.navigation == PerformanceNavigation.TYPE_NAVIGATE;
+						if (!didNavigate) {
+							document.querySelector('.f-modal-error').style.display = 'block';
+							document.querySelector('#message').innerHTML = 'Do not refresh this page.<br>Go back and click the<br>Attendance link from Schoology.';
+							document.querySelector('#message').classList.add('error');
+						} else {
+							document.querySelector('.f-modal-success').style.display = 'block';
+							document.querySelector('#message').innerHTML = 'Attendance Recorded';
+							document.querySelector('#message').classList.add('success');
+						
+							html += '<span id="time-start" class="time success">' + start.format('h:mm A') + '</span>';
+							html += '<div class="line line-success"></div>';
+							html += '<span id="time-now" class="time success">' + now.format('h:mm A') + '</span>';
+							html += '<div class="line line-success"></div>';
+							html += '<span id="time-end" class="time success">' + end.format('h:mm A') + '</span>';
+						}
 					} else {
 						document.querySelector('.f-modal-error').style.display = 'block';
 						document.querySelector('#message').classList.add('error');
