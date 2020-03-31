@@ -673,9 +673,7 @@
 		
 		const today = '3/31/20';
 		const now = dayjs(today + ' ' + '1:25 PM', 'M/D/YY h:mm A');
-		
-		console.log(window.performance.navigation);
-		
+				
 		let metToday = false;
 		if (today in schedule) {
 			const bell = schedule[today];
@@ -692,7 +690,7 @@
 					html = '';
 					if (now.isBetween(start, end, null, '[]')) {
 						
-						const didNavigate = window.performance.navigation == PerformanceNavigation.TYPE_NAVIGATE;
+						const didNavigate = window.performance.navigation.type == PerformanceNavigation.TYPE_NAVIGATE;
 						if (!didNavigate) {
 							document.querySelector('.f-modal-error').style.display = 'block';
 							document.querySelector('#message').innerHTML = 'Do not refresh this page.<br>Go back and click the<br>Attendance link from Schoology.';
